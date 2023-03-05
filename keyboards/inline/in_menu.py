@@ -43,7 +43,12 @@ async def in_menu_mybots_edit(users_id, apitoken):
     array_bot_user = get_db_telegram.get_bot_in_api_token(apitoken=apitoken)
 
     keyboard.insert(types.InlineKeyboardButton(text=f"💢 Удалить", callback_data=f"deletbot {array_bot_user['apitoken']}"))
+    if array_bot_user['status'] == 'True':
+        keyboard.insert(types.InlineKeyboardButton(text=f"🧰 Стоп", callback_data=f"stopbot {array_bot_user['apitoken']}"))
+    else:
+        keyboard.insert(types.InlineKeyboardButton(text=f"🔫 Запустить", callback_data=f"stopbot {array_bot_user['apitoken']}"))
 
+    keyboard.insert(types.InlineKeyboardButton(text=f"🉑 Перезапустить", callback_data=f"restartbot {array_bot_user['apitoken']}"))
 
     keyboard.insert(types.InlineKeyboardButton(text=f"🔙 Назад", callback_data=f"mybots {users_id}"))
 

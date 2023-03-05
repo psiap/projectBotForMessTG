@@ -5,7 +5,6 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import CommandStart
 
 from data.captcha import Captcha
-from keyboards.default import menu_start
 from keyboards.inline.in_menu import in_menu_start
 from loader import dp, bot
 from utils.db_api.db import BotDB

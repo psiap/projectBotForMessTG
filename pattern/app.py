@@ -10,10 +10,12 @@ from utils.set_bot_commands import set_default_commands
 
 
 async def on_startup(dispatcher):
+
     await set_default_commands(dispatcher)
 
     await on_startup_notify(dispatcher)
 
+    #asyncio.create_task(replace_mess())
 
 
 if __name__ == '__main__':

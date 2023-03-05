@@ -47,6 +47,10 @@ class BotDB:
         self.cursor.execute(f"SELECT * FROM mydbsubs.tbsubs where (`apitoken` = '{apitoken}');")
         return self.cursor.fetchone()
 
+    def edit_bots_status(self, apitoken,status):
+        self.cursor.execute(f"UPDATE `mydbsubs`.`tbsubs` SET `status` = '{status}' WHERE (`apitoken` = '{apitoken}');")
+        return self.conn.commit()
+
     def del_bot_in_api_token(self,apitoken):
         self.cursor.execute(f"DELETE FROM mydbsubs.tbsubs WHERE (`apitoken` = '{apitoken}');")
         return self.conn.commit()
@@ -55,13 +59,13 @@ class BotDB:
         self.cursor.execute(f"SELECT DISTINCT userid FROM mydbsubs.tbsubs;")
         return self.cursor.fetchall()
 
-    def add_bots_in_bd(self,userid,apitoken,botname,username):
+    def add_bots_in_bd(self,userid,apitoken):
         self.cursor.execute(f"SELECT * FROM mydbsubs.tbsubs where (`apitoken` = '{apitoken}');")
         if self.cursor.fetchone():
             pass
         else:
             self.cursor.execute(f"INSERT INTO mydbsubs.tbsubs "
-                                f"(`userid`, `apitoken`, `botname`, `username`)"
-                                f" VALUES ('{userid}', '{apitoken}', '{botname}', '{username}');")
+                                f"(`userid`, `apitoken`)"
+                                f" VALUES ('{userid}', '{apitoken}');")
 
         return self.conn.commit()

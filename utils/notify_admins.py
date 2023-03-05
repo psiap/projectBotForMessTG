@@ -17,9 +17,10 @@ async def on_startup_notify(dp: Dispatcher):
             os.kill(i["pid"], signal.SIGTERM)
         except:
             pass
-        proc = subprocess.Popen(['python', "bots/bot_subs/app.py", f'{i["apitoken"]}', f'{i["userid"]}'],
+        proc = subprocess.Popen(['python', f"bots/{i['apitoken'].replace(':','')}/app.py", f'{i["apitoken"]}', f'{i["userid"]}'],
                                 shell=False)
         get_db_telegram.edit_pid_bot(apitoken=i["apitoken"], pid=proc.pid)
+        get_db_telegram.edit_bots_status(apitoken=i["apitoken"], status='True')
         print(i)
 
     print('Боты запущенны')
